@@ -25,8 +25,14 @@ namespace Weather_App
         public MainWindow()
         {
             ApiViewModel apiViewModel = new ApiViewModel();
+            var dataResult = apiViewModel.GetWeatherForcast();
+            var weatherData = apiViewModel.GetTemps(dataResult);
+
+            Resources["WeatherData"] = weatherData;
+
             InitializeComponent();
-            apiViewModel.GetWeatherForcast();
+            
+
         }
     }
 }

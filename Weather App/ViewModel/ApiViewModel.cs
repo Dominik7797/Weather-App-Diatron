@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Weather_App.Model;
 
 namespace Weather_App.ViewModel
@@ -14,12 +12,25 @@ namespace Weather_App.ViewModel
 
         public WeatherData.Root GetWeatherForcast()
         {
-            using(var webClient = new WebClient())
+            using (var webClient = new WebClient())
             {
                 var rawJson = webClient.DownloadString(_APIKEY);
                 var result = JsonConvert.DeserializeObject<WeatherData.Root>(rawJson);
                 return result;
             }
+        }
+
+        public Dictionary<string, int> GetTemps(WeatherData.Root weatherData)
+        {
+            var resultDict = new Dictionary<string, int>();
+
+            foreach (var item in weatherData.List)
+            {
+                var avg = Convert.ToInt32(item.Main.Temp);
+
+                resultDict.Add(item.DtTxt, avg);
+            }
+            return resultDict;
         }
     }
 }

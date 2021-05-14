@@ -6,7 +6,20 @@
         xmlns:local="clr-namespace:Weather_App"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="10">
+        <ListBox ItemsSource="{DynamicResource WeatherData}" Grid.IsSharedSizeScope="True">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="Key" />
+                            <ColumnDefinition SharedSizeGroup="Value" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="2" Text="{Binding Key}" Grid.Column="0"/>
+                        <TextBlock Margin="2" Text="{Binding Value}" Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
