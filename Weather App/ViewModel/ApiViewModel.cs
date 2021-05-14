@@ -27,10 +27,27 @@ namespace Weather_App.ViewModel
             foreach (var item in weatherData.List)
             {
                 var avg = Convert.ToInt32(item.Main.Temp);
-
                 resultDict.Add(item.DtTxt, avg);
             }
-            return resultDict;
+
+            CountAvgPerDay(resultDict);
+            return null;
+        }
+
+        private void CountAvgPerDay(Dictionary<string, int> resultDict)
+        {
+            var avgPerDay = new Dictionary<string, int>();
+            var avgTemp = 0; 
+
+            foreach (var kvp in resultDict)
+            {
+                var splittDatetime = kvp.Key.Split(' ');
+                var dateTime = splittDatetime[0];
+                if (avgPerDay.ContainsKey(dateTime))
+                {
+                    avgTemp += kvp.Value()
+                }
+            }
         }
     }
 }
