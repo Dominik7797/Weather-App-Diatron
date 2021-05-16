@@ -9,34 +9,40 @@ namespace Weather_App.Model
 {
     public class WeatherData
     {
-        public class Main
+        public class Temp
         {
-            [JsonProperty("temp")]
-            public double Temp { get; set; }
+            [JsonProperty("day")]
+            public double Day { get; set; }
 
-            [JsonProperty("feels_like")]
-            public double FeelsLike { get; set; }
+            [JsonProperty("min")]
+            public double Min { get; set; }
 
-            [JsonProperty("temp_min")]
-            public double TempMin { get; set; }
+            [JsonProperty("max")]
+            public double Max { get; set; }
 
-            [JsonProperty("temp_max")]
-            public double TempMax { get; set; }
+            [JsonProperty("night")]
+            public double Night { get; set; }
 
-            [JsonProperty("pressure")]
-            public int Pressure { get; set; }
+            [JsonProperty("eve")]
+            public double Eve { get; set; }
 
-            [JsonProperty("sea_level")]
-            public int SeaLevel { get; set; }
+            [JsonProperty("morn")]
+            public double Morn { get; set; }
+        }
 
-            [JsonProperty("grnd_level")]
-            public int GrndLevel { get; set; }
+        public class FeelsLike
+        {
+            [JsonProperty("day")]
+            public double Day { get; set; }
 
-            [JsonProperty("humidity")]
-            public int Humidity { get; set; }
+            [JsonProperty("night")]
+            public double Night { get; set; }
 
-            [JsonProperty("temp_kf")]
-            public double TempKf { get; set; }
+            [JsonProperty("eve")]
+            public double Eve { get; set; }
+
+            [JsonProperty("morn")]
+            public double Morn { get; set; }
         }
 
         public class Weather
@@ -54,89 +60,84 @@ namespace Weather_App.Model
             public string Icon { get; set; }
         }
 
-        public class Clouds
-        {
-            [JsonProperty("all")]
-            public int All { get; set; }
-        }
-
-        public class Wind
-        {
-            [JsonProperty("speed")]
-            public double Speed { get; set; }
-
-            [JsonProperty("deg")]
-            public int Deg { get; set; }
-
-            [JsonProperty("gust")]
-            public double Gust { get; set; }
-        }
-
-        public class Rain
-        {
-            [JsonProperty("3h")]
-            public double _3h { get; set; }
-        }
-
-        public class Sys
-        {
-            [JsonProperty("pod")]
-            public string Pod { get; set; }
-        }
-
-        public class List
+        public class Daily
         {
             [JsonProperty("dt")]
             public int Dt { get; set; }
 
-            [JsonProperty("main")]
-            public Main Main { get; set; }
+            [JsonProperty("sunrise")]
+            public int Sunrise { get; set; }
+
+            [JsonProperty("sunset")]
+            public int Sunset { get; set; }
+
+            [JsonProperty("moonrise")]
+            public int Moonrise { get; set; }
+
+            [JsonProperty("moonset")]
+            public int Moonset { get; set; }
+
+            [JsonProperty("moon_phase")]
+            public double MoonPhase { get; set; }
+
+            [JsonProperty("temp")]
+            public Temp Temp { get; set; }
+
+            [JsonProperty("feels_like")]
+            public FeelsLike FeelsLike { get; set; }
+
+            [JsonProperty("pressure")]
+            public int Pressure { get; set; }
+
+            [JsonProperty("humidity")]
+            public int Humidity { get; set; }
+
+            [JsonProperty("dew_point")]
+            public double DewPoint { get; set; }
+
+            [JsonProperty("wind_speed")]
+            public double WindSpeed { get; set; }
+
+            [JsonProperty("wind_deg")]
+            public int WindDeg { get; set; }
+
+            [JsonProperty("wind_gust")]
+            public double WindGust { get; set; }
 
             [JsonProperty("weather")]
             public List<Weather> Weather { get; set; }
 
             [JsonProperty("clouds")]
-            public Clouds Clouds { get; set; }
-
-            [JsonProperty("wind")]
-            public Wind Wind { get; set; }
-
-            [JsonProperty("visibility")]
-            public int Visibility { get; set; }
+            public int Clouds { get; set; }
 
             [JsonProperty("pop")]
             public double Pop { get; set; }
 
             [JsonProperty("rain")]
-            public Rain Rain { get; set; }
+            public double Rain { get; set; }
 
-            [JsonProperty("sys")]
-            public Sys Sys { get; set; }
-
-            [JsonProperty("dt_txt")]
-            public string DtTxt { get; set; }
-        }
-
-        public class City
-        {
+            [JsonProperty("uvi")]
+            public double Uvi { get; set; }
         }
 
         public class Root
         {
-            [JsonProperty("cod")]
-            public string Cod { get; set; }
+            [JsonProperty("lat")]
+            public double Lat { get; set; }
 
-            [JsonProperty("message")]
-            public int Message { get; set; }
+            [JsonProperty("lon")]
+            public double Lon { get; set; }
 
-            [JsonProperty("cnt")]
-            public int Cnt { get; set; }
+            [JsonProperty("timezone")]
+            public string Timezone { get; set; }
 
-            [JsonProperty("list")]
-            public List<List> List { get; set; }
+            [JsonProperty("timezone_offset")]
+            public int TimezoneOffset { get; set; }
 
-            [JsonProperty("city")]
-            public City City { get; set; }
+            [JsonProperty("daily")]
+            public List<Daily> Daily { get; set; }
         }
+
+
     }
 }

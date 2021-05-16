@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Net;
 using Weather_App.Model;
 
@@ -8,7 +10,7 @@ namespace Weather_App.ViewModel
 {
     class ApiViewModel
     {
-        private const string _APIKEY = "http://api.openweathermap.org/data/2.5/forecast?q=Budapest&units=metric&appid=b03caa60c8b499890c552d1690aaccb6";
+        private const string _APIKEY = "https://api.openweathermap.org/data/2.5/onecall?lat=47.497913&lon=19.040236&exclude=alerts,current,minutely,hourly,&units=metric&appid=b03caa60c8b499890c552d1690aaccb6";
 
         public WeatherData.Root GetWeatherForcast()
         {
@@ -24,30 +26,22 @@ namespace Weather_App.ViewModel
         {
             var resultDict = new Dictionary<string, int>();
 
-            foreach (var item in weatherData.List)
+            foreach (var item in weatherData.Daily)
             {
-                var avg = Convert.ToInt32(item.Main.Temp);
-                resultDict.Add(item.DtTxt, avg);
+                var convertedDateTime = UnixTimeToDateTime(item.Dt);
+                Console.WriteLine(convertedDateTime);
+                int avgTemp = Convert.ToInt32(item.Temp.Day);
+                resultDict.Add(convertedDateTime.ToString(), avgTemp); ;
             }
 
-            CountAvgPerDay(resultDict);
-            return null;
+            return resultDict;
         }
 
-        private void CountAvgPerDay(Dictionary<string, int> resultDict)
+        public string UnixTimeToDateTime(long unixtime)
         {
-            var avgPerDay = new Dictionary<string, int>();
-            var avgTemp = 0; 
-
-            foreach (var kvp in resultDict)
-            {
-                var splittDatetime = kvp.Key.Split(' ');
-                var dateTime = splittDatetime[0];
-                if (avgPerDay.ContainsKey(dateTime))
-                {
-                    avgTemp += kvp.Value()
-                }
-            }
+            System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+            dateTime = dateTime.AddSeconds(unixtime);
+            return dateTime.ToShortDateString();
         }
     }
 }
