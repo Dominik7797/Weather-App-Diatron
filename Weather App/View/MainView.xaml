@@ -7,12 +7,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Weather_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="498.893" Width="1001.006">
     <Grid>
         <DVC:Chart Canvas.Top="80" Canvas.Left="10" Name="mcChart"  
  Background="LightSteelBlue">
             <DVC:Chart.Series>
-                <DVC:LineSeries ItemsSource="{DynamicResource ResourceKey=WeatherData}" Title=" Monthly Count"  
+                <DVC:LineSeries ItemsSource="{DynamicResource ResourceKey=WeatherData}" Title=" Temp Chart (Metric)"  
       IndependentValueBinding="{Binding Path=Key}"  
       DependentValueBinding="{Binding Path=Value}">
                 </DVC:LineSeries>
